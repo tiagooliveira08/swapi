@@ -1,8 +1,15 @@
 import { makeCall } from "helpers";
 import { StarshipsModel } from "types";
 
+interface GetAllStarshipsResponse {
+  count: number;
+  next?: string;
+  previous?: string;
+  results: StarshipsModel;
+}
+
 export function getAllStarships() {
-  return makeCall<StarshipsModel>({
+  return makeCall<GetAllStarshipsResponse>({
     method: {
       methodType: "get",
     },

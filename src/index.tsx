@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Normalize from "react-normalize";
 
 import { StoresProvider } from "stores";
-import Normalize from "react-normalize";
-import App from "./App";
+import { App } from "./App";
 
 const queryClient = new QueryClient();
 

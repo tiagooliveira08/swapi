@@ -37,9 +37,9 @@ export function makeCall<T>({ url, method, options }: baseQuerys): Promise<T> {
   });
   const querysTypes: RequestTypes<T> = {
     get: async () => api.get(url, { params: method.params }),
-    put: () => api.put(url, method.params),
-    post: () => api.post(url, method.params),
-    delete: () => api.delete(url),
+    put: async () => api.put(url, method.params),
+    post: async () => api.post(url, method.params),
+    delete: async () => api.delete(url),
   };
 
   return querysTypes[method.methodType]().then((p) => p.data);

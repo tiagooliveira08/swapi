@@ -1,14 +1,16 @@
 import { Footer, Header } from "components";
 import { Home } from "containers/Home";
 
-function App() {
+import { useGlobalStyles } from "styles";
+
+export function App() {
+  const useStyles = useGlobalStyles();
+
   return (
-    <div>
+    <div className={useStyles["@global"]}>
       <Header />
       <Home />
       <Footer />
     </div>
   );
 }
-
-export default App;
