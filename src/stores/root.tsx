@@ -1,6 +1,1 @@
-import { useState } from 'react'
-
-
-export function useRoot() {
-  
-}
+export function useRoot() {}

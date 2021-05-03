@@ -1,47 +1,46 @@
-import axios, { AxiosResponse } from 'axios'
-import https from 'https'
+import axios, { AxiosResponse } from "axios";
+import https from "https";
 
-type methodType = 'post' | 'get' | 'put' | 'delete'
-type ApiType = 'editorial' | 'location'
+type methodType = "post" | "get" | "put" | "delete";
+type ApiType = "swapi";
 
 interface baseQuerys {
-  url: string
+  url: string;
   method: {
-    methodType: methodType
-    params?: any
-  }
+    methodType: methodType;
+    params?: any;
+  };
   options?: {
-    apiBase: ApiType
-  }
+    apiBase: ApiType;
+  };
 }
 
 type RequestTypes<K> = {
-  [key in methodType]: () => Promise<AxiosResponse<K>>
-}
+  [key in methodType]: () => Promise<AxiosResponse<K>>;
+};
 
 type ApyTypes = {
-  [key in ApiType]: string | undefined
-}
+  [key in ApiType]: string | undefined;
+};
 
-export function makeCall<T>({ url, method, options }: baseQuerys): Promise<AxiosResponse<T>> {
+export function makeCall<T>({ url, method, options }: baseQuerys): Promise<T> {
   const apiAlternatives: ApyTypes = {
-    editorial: process.env.NEXT_PUBLIC_EDITORIAL_API,
-    location: process.env.NEXT_PUBLIC_LOCATION_API,
-  }
+    swapi: "https://swapi.dev/api/",
+  };
 
   const api = axios.create({
-    baseURL: apiAlternatives[options?.apiBase || 'editorial'],
-    headers: { accept: '*/*' },
+    baseURL: apiAlternatives[options?.apiBase || "swapi"],
+    headers: { accept: "*/*" },
     httpsAgent: new https.Agent({
       rejectUnauthorized: false,
     }),
-  })
+  });
   const querysTypes: RequestTypes<T> = {
     get: async () => api.get(url, { params: method.params }),
     put: () => api.put(url, method.params),
     post: () => api.post(url, method.params),
     delete: () => api.delete(url),
-  }
+  };
 
-  return querysTypes[method.methodType]()
+  return querysTypes[method.methodType]().then((p) => p.data);
 }

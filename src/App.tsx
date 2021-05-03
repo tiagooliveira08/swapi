@@ -1,7 +1,12 @@
+import { Footer, Header } from "components";
+import { Home } from "containers/Home";
+
 function App() {
   return (
     <div>
-      hello
+      <Header />
+      <Home />
+      <Footer />
     </div>
   );
 }

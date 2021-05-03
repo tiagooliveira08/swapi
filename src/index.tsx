@@ -1,13 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import { StoresProvider } from "stores";
+import Normalize from "react-normalize";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <Normalize />
+      <StoresProvider>
+        <App />
+      </StoresProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-reportWebVitals();

@@ -1,3 +1,3 @@
 export function Footer() {
-  <footer>footer</footer>;
+  return <footer>footer</footer>;
 }
