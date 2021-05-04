@@ -5,7 +5,7 @@ interface GetAllStarshipsResponse {
   count: number;
   next?: string;
   previous?: string;
-  results: StarshipsModel;
+  results: StarshipsModel[];
 }
 
 export function getAllStarships() {

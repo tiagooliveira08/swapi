@@ -1,24 +1,26 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext } from "react";
 
-import { useRoot } from './root'
+import { useSwapi } from "./swapiStore";
 
-interface IStores {
-  locationStore: ReturnType<typeof useRoot>
+interface Stores {
+  swapi: ReturnType<typeof useSwapi>;
 }
 
-const storesContext = createContext<IStores | null>(null)
+const storesContext = createContext<Stores | null>(null);
 
 interface StoresProps {
-  children: React.ReactElement
+  children: React.ReactElement;
 }
 
 export function StoresProvider({ children }: StoresProps) {
   const stores = {
-    locationStore: useRoot(),
-  }
+    swapi: useSwapi(),
+  };
 
-  return <storesContext.Provider value={stores}>{children}</storesContext.Provider>
+  return (
+    <storesContext.Provider value={stores}>{children}</storesContext.Provider>
+  );
 }
 export function useStore() {
-  return useContext(storesContext)!
+  return useContext(storesContext)!;
 }

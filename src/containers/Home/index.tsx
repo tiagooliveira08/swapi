@@ -1,17 +1,11 @@
-import { useQuery } from "react-query";
-
-import { getAllStarships } from "services";
+import { useStore } from "stores";
 import { Search } from "./Search";
 
 import { useStyles } from "./styles";
 
 export function Home() {
-  const { data: allStarships } = useQuery(
-    getAllStarships.name,
-    getAllStarships
-  );
-
   const styles = useStyles();
+  const { swapi } = useStore();
 
   return (
     <div className={styles.home}>
