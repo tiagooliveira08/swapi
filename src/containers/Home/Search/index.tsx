@@ -1,10 +1,13 @@
-import { useState } from "react";
+import NumberFormat from "react-number-format";
 
 import { useStyles } from "./styles";
 
-export function Search() {
-  const [value, setValue] = useState<string | null>(null);
+interface SearchProps {
+  value: string | null;
+  onChange(value: string): void;
+}
 
+export function Search(props: SearchProps) {
   const styles = useStyles();
 
   return (
@@ -13,12 +16,14 @@ export function Search() {
         <span className={styles.cardSearchText}>
           Distância a ser percorrida (MGLT)
         </span>
-        <input
-          className={styles.inputSearch}
-          placeholder="123456"
+        <NumberFormat
           autoFocus
-          value={value || undefined}
-          onChange={(event) => setValue(event.target.value)}
+          thousandSeparator="."
+          decimalSeparator=","
+          placeholder="Insira aqui!"
+          className={styles.inputSearch}
+          value={props.value ?? undefined}
+          onValueChange={(values) => props.onChange(values.value)}
         />
       </div>
     </div>
