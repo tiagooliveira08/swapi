@@ -16,7 +16,6 @@ export function useSwapi() {
     getAllStarships.name,
     getAllStarships,
     {
-      enabled: Boolean(search?.length),
       refetchOnWindowFocus: false,
     }
   );
